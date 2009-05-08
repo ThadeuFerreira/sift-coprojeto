@@ -1153,11 +1153,13 @@ icvGaussianBlur_small_8u_CnR( uchar* src, int srcStep,
         int *tdst;
         uchar *tdst2;
         int *saved_row = rows[ker_y];
+	
 
+	tsrc = src - ker_x_n;
         /* fill cyclic buffer - horizontal filtering */
         for( ; crows < ker_height; crows++ )
         {
-            tsrc = src - ker_x_n;
+
             tdst = rows[crows];
 
             if( src_height-- <= 0 )
@@ -1335,6 +1337,7 @@ icvGaussianBlur_small_8u_CnR( uchar* src, int srcStep,
 
             if( crows < ker_height )
                 src += srcStep;
+		            tsrc = src - ker_x_n;
         }
 
         if( starting_flag )
@@ -1813,10 +1816,11 @@ icvGaussianBlur_32f_CnR( float* src, int srcStep,
         float *tdst2;
         float *saved_row = rows[ker_y];
 
+	tsrc = src - ker_x_n;
         /* fill cyclic buffer - horizontal filtering */
         for( ; crows < ker_height; crows++ )
         {
-            tsrc = src - ker_x_n;
+
             tdst = rows[crows];
 
             if( src_height-- <= 0 )
@@ -1936,6 +1940,7 @@ icvGaussianBlur_32f_CnR( float* src, int srcStep,
 
             if( crows < ker_height )
                 src += srcStep;
+		tsrc = src - ker_x_n;
         }
 
         if( starting_flag )
